@@ -25,6 +25,12 @@ mongoose
 // Use Routes
 app.use("/api/reservations", reservations)
 
+// "/" Route
+app.get("/", (req, res) => {
+    console.log("Respoding to root request");
+    res.send("Hello from the other side");
+});
+
 // Port Connection 
 const port = process.env.PORT || 5000;
 
