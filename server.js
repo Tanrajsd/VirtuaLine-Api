@@ -32,14 +32,13 @@ app.get("/", (req, res) => {
     res.send("Hello from the other side");
 });
 
-app.post("/reservation/post", (req, res) => {
-    const newReservation = new Reservation({
-        name: req.body.name,
-        size: req.body.size,
-        time: req.body.time,
-        notified: req.body.notified
-    })
-    newReservation.save().then(reservation => res.json(reservation))
+app.post('/sms', (req, res) => {
+    const twiml = new MessagingResponse();
+
+    twiml.message('Fact: Tanraj is better at ball than Shubh!');
+
+    res.writeHead(200, { 'Content-Type': 'text/xml' });
+    res.end(twiml.toString());
 });
 
 // Port Connection 
