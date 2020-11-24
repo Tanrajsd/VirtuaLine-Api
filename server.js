@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
 var cors = require('cors');
 const Reservation = require('./models/reservation');
 
@@ -41,7 +42,8 @@ app.post('/sms', (req, res) => {
     res.end(twiml.toString());
 });
 
-// Port Connection 
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Server started on port ${port}`));
+// PORT Connection
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log("Server is up and listening");
+});

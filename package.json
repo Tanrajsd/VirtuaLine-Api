@@ -23,7 +23,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.10.15"
+    "mongoose": "^5.10.15",
+    "twilio": "^3.52.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
