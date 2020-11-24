@@ -1,12 +1,16 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+var cors = require('cors');
 
 const reservations = require('./routes/api/reservations')
 
 const app = express();
 
 // Bodyparser Middleware
+app.use(cors({
+    origin: 'https://virtualline-api.herokuapp.com'
+}));
 app.use(bodyParser.json());
 
 // Database config
