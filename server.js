@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 var cors = require('cors');
+const Reservation = require('../../models/reservation');
 
 const reservations = require('./routes/api/reservations')
 
@@ -29,6 +30,16 @@ app.use("/api/reservations", reservations)
 app.get("/", (req, res) => {
     console.log("Respoding to root request");
     res.send("Hello from the other side");
+});
+
+app.post("/reservation/post", (req, res) => {
+    const newReservation = new Reservation({
+        name: req.body.name,
+        size: req.body.size,
+        time: req.body.time,
+        notified: req.body.notified
+    })
+    newReservation.save().then(reservation => res.json(reservation))
 });
 
 // Port Connection 
