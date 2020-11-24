@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 var cors = require('cors');
-const Reservation = require('../../models/reservation');
+const Reservation = require('./models/reservation');
 
 const reservations = require('./routes/api/reservations')
 
