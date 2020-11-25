@@ -1,9 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
 var cors = require('cors');
-const Reservation = require('./models/reservation');
 
 const reservations = require('./routes/api/reservations')
 
@@ -11,9 +9,10 @@ const app = express();
 
 // Bodyparser Middleware
 app.use(cors({
-    origin: 'https://virtualline-api.herokuapp.com'
+    // origin: 'https://virtualline-api.herokuapp.com'
+    origin: 'http://localhost:5000'
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Database config
 const db = require('./config/keys').mongoURI;
@@ -27,19 +26,10 @@ mongoose
 // Use Routes
 app.use("/api/reservations", reservations)
 
-// "/" Route
+// Index page route
 app.get("/", (req, res) => {
     console.log("Respoding to root request");
     res.send("Hello from the other side");
-});
-
-app.post('/sms', (req, res) => {
-    const twiml = new MessagingResponse();
-
-    twiml.message('Fact: Tanraj is better at ball than Shubh!');
-
-    res.writeHead(200, { 'Content-Type': 'text/xml' });
-    res.end(twiml.toString());
 });
 
 // PORT Connection

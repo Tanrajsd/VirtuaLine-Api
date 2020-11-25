@@ -1,6 +1,9 @@
 const express = require('express');
 const reservation = require('../../models/reservation');
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const router = express.Router();
+
+var step = 0;
 
 // Reservation Model
 const Reservation = require('../../models/reservation');
@@ -18,13 +21,23 @@ router.get("/", (req, res) => {
 // @desc    Create a reservation
 // @access  Public
 router.post("/", (req, res) => {
-    const newReservation = new Reservation({
-        name: req.body.name,
-        size: req.body.size,
-        time: req.body.time,
-        notified: req.body.notified
-    })
-    newReservation.save().then(reservation => res.json(reservation))
+    step++;
+    console.log(step);
+    const lies = req.body.Body
+
+    const twiml = new MessagingResponse();
+
+    twiml.message('Fact: Tanraj is better at ball than Shubh!');
+
+    res.writeHead(200, { 'Content-Type': 'text/xml' });
+    res.end(twiml.toString());
+    // const newReservation = new Reservation({
+    //     name: req.body.name,
+    //     size: req.body.size,
+    //     time: req.body.time,
+    //     notified: req.body.notified
+    // })
+    // newReservation.save().then(reservation => res.json(reservation))
 });
 
 // @route   DELETE api/reservations
