@@ -2,17 +2,19 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 var cors = require('cors');
-
+const index = require('./routes/api/index')
 const reservations = require('./routes/api/reservations')
+const sms = require('./routes/api/sms')
 
 const app = express();
 
-// Bodyparser Middleware
+// Bodyparser Middleware OR Heroku Bodyparser Middleware
 app.use(cors({
     // origin: 'https://virtualline-api.herokuapp.com'
     origin: 'http://localhost:5000'
 }));
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Database config
 const db = require('./config/keys').mongoURI;
@@ -25,12 +27,8 @@ mongoose
 
 // Use Routes
 app.use("/api/reservations", reservations)
-
-// Index page route
-app.get("/", (req, res) => {
-    console.log("Respoding to root request");
-    res.send("Hello from the other side");
-});
+app.use("/api/reservations/sms", sms)
+app.use("/", index)
 
 // PORT Connection
 const PORT = process.env.PORT || 5000;

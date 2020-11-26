@@ -17,7 +17,7 @@ const ReservationSchema = new Schema({
     },
     notified: {
         type: Boolean,
-        required: true
+        required: false
     }
 });
 
