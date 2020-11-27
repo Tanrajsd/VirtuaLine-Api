@@ -11,11 +11,13 @@ const Reservation = require('../../models/reservation');
 // @desc    Create a reservation
 // @access  Public (ALSO NEEDS NGROK PORITNG OR LIVE SERVER FOR TESTING/USE)
 router.post("/", (req, res) => {
-    // TODO IMPLEMENT STEPPER
+
+    // Send the customer a message back
+    // TODO IMPLEMENT STEPPER 
     step++;
     console.log(step);
-    const textMessage = req.body.Body
-    console.log(textMessage)
+    const textMessage = new String(req.body.Body)
+    console.log(req)
 
     const twiml = new MessagingResponse();
 
@@ -23,6 +25,16 @@ router.post("/", (req, res) => {
 
     res.writeHead(200, { 'Content-Type': 'text/xml' });
     res.end(twiml.toString());
+
+    // Save the customer to the database
+    // Use stepper to implement TBDs
+    const newReservation = new Reservation({
+        name: textMessage,
+        size: "TBD",
+        time: "TBD",
+        notified: false
+    })
+    newReservation.save()
 });
 
 module.exports = router;

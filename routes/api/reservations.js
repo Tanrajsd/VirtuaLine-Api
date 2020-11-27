@@ -78,6 +78,7 @@ router.delete("/", (req, res) => {
 // @desc    Edit a reservation
 // @access  Public
 router.put("/", (req, res) => {
+    console.log("ran")
     const data = {
         notified: req.body.notified
     }
