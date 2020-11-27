@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var ObjectId = require('mongodb').ObjectID;
 
 // Reservation Model
 const Reservation = require('../../models/reservation');
@@ -25,15 +26,22 @@ router.post("/", (req, res) => {
     })
     newReservation.save()
         .then(reservation => res.json(reservation))
+<<<<<<< HEAD
+=======
+        .catch((err)  => console.log(err))
+>>>>>>> origin/master
 });
 
 // @route   DELETE api/reservations
 // @desc    Delete a reservation
 // @access  Public
 router.delete("/", (req, res) => {
-    Reservation.findById(req.params.id)
-        .then(reservation => reservation.remove().then(() => res.json({ success: true })))
-        .catch(err => res.status(404).json({ success: false }));
+    // Reservation.findById(req.params.id)
+    //     .then(reservation => reservation.remove().then(() => res.json({ success: true })))
+    //     .catch(err => res.status(404).json({ success: false }));
+    let id = req.body.id
+    Reservation.deleteOne( {"_id": ObjectId(id)})
+    .then(reservation => res.json(reservation)).catch((err) => console.log(err));
 })
 
 // @route   PUT api/reservations
