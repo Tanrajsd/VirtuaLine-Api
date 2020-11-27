@@ -8,12 +8,12 @@ const sms = require('./routes/api/sms')
 
 const app = express();
 
-// Bodyparser Middleware OR Heroku Bodyparser Middleware
+// Bodyparser Middleware OR Twillio Bodyparser Middleware
 app.use(cors({
-    // origin: 'https://virtualline-api.herokuapp.com'
-    origin: 'http://localhost:5000'
+    // origin: 'https://virtualline-client.herokuapp.com'
+    origin: 'http://localhost:3000'
 }));
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Database config

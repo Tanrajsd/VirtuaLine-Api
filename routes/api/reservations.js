@@ -25,7 +25,6 @@ router.post("/", (req, res) => {
     })
     newReservation.save()
         .then(reservation => res.json(reservation))
-        .catch(console.log("Error: Could not add to database!"))
 });
 
 // @route   DELETE api/reservations
@@ -41,6 +40,7 @@ router.delete("/", (req, res) => {
 // @desc    Edit a reservation
 // @access  Public
 router.put("/", (req, res) => {
+    console.log("ran")
     const data = {
         notified: req.body.notified
     }
