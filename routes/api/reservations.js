@@ -38,7 +38,7 @@ router.delete("/", (req, res) => {
     //     .catch(err => res.status(404).json({ success: false }));
     let id = req.body.id
     Reservation.deleteOne( {"_id": ObjectId(id)})
-    .then().catch();
+    .then(reservation => res.json(reservation)).catch((err) => console.log(err));
 })
 
 // @route   PUT api/reservations
