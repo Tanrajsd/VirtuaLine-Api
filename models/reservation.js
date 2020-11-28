@@ -8,16 +8,20 @@ const ReservationSchema = new Schema({
         required: true
     },
     size: {
-        type: String,
+        type: Number,
         required: true
     },
     time: {
         type: String,
         requred: true
     },
-    notified: {
-        type: Boolean,
-        required: false
+    rawTime: {
+        type: Number,
+        requred: true
+    },
+    phoneNumber: {
+        type: String,
+        required: true
     }
 });
 
